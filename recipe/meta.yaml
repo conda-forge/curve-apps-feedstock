@@ -1,6 +1,7 @@
 {% set name = "curve-apps" %}
 {% set version = "0.1.0" %}
-{% set python_min = 3.9 %}
+{% set python_min = 3.10 %}
+{% set python_max = 3.11 %}
 
 package:
   name: {{ name|lower }}
@@ -22,7 +23,7 @@ requirements:
     - setuptools
     - pip
   run:
-    - python >={{ python_min }}
+    - python >={{ python_min }},<{{ python_max }}
     - numpy >=1.23.5,<1.24.0
     - pydantic >=2.5.2,<2.6.0
     - scikit-image >=0.20.0,<0.21.0
