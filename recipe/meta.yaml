@@ -1,5 +1,5 @@
 {% set name = "curve-apps" %}
-{% set version = "0.1.0" %}
+{% set version = "0.2.0" %}
 {% set python_min = "3.10" %}
 {% set python_max = "3.11" %}
 
@@ -8,13 +8,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/MiraGeoscience/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 4f27dd329604035573c94ca67a3ebc8e72a6a314e82f8fffb7c22757170d625c
+  url: https://github.com/MiraGeoscience/{{ name }}/archive/v{{ version }}.zip
+  sha256: 91459039c962adf9368750f872521e04c3296cc37e2a3978d87d7a1033ceac38
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -51,7 +51,7 @@ about:
   description: |
     Auto-detection of trends and edges in geoscientific data.
   license: MIT
-  license_file: 
+  license_file:
     - LICENSE
   doc_url: https://mirageoscience-curve-apps.readthedocs-hosted.com/
   dev_url: https://github.com/MiraGeoscience/curve-apps
