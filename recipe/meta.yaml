@@ -24,10 +24,8 @@ requirements:
     - pip
   run:
     - python >={{ python_min }},<{{ python_max }}
-    # Mira packages
-    - geoh5py >=0.10.0b1, <0.11.dev
-    - geoapps-utils >=0.4.0b1,<0.5.dev
-    # direct dependencies
+    - geoh5py >=0.10.0,<0.11.dev
+    - geoapps-utils >=0.4.0,<0.5.dev
     - numpy >=1.26.0,<1.27.dev
     - pydantic >=2.5.2,<2.6.dev
     - scikit-image >=0.24.0,<0.25.dev
@@ -56,5 +54,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - SophieCurinier
-    - sebhmg
+    - conda-forge/geoh5py
