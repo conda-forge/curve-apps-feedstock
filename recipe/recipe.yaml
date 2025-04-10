@@ -42,6 +42,14 @@ tests:
       imports:
         - curve_apps
       pip_check: true
+  - script:
+      - pytest --ignore=tests/version_test.py
+    requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
 
 about:
   summary: Find edges on 2D grids or vertices.
