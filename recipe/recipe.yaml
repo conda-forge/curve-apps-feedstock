@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: curve-apps
-  version: "0.2.1"
+  version: "0.3.0"
   python_min: '3.10'
 
 package:
@@ -10,8 +10,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/MiraGeoscience/${{ name }}/archive/v${{ version }}.tar.gz
-  sha256: 70a32eb135b015eabf94f50fabe973ab69f53857678a22d78211d8de946c0f4a
+  url: https://github.com/MiraGeoscience/${{ name }}/archive/v${{ version }}.zip
+  sha256: 448f5220a3c7b1d9ebf943b9d7d32276f3b085ebda7f9fc7394e37b8142bf137
 
 build:
   number: 0
