@@ -14,16 +14,17 @@ Development: https://github.com/MiraGeoscience/curve-apps
 Documentation: https://mirageoscience-curve-apps.readthedocs-hosted.com/
 
 Auto-detection of trends and edges in geoscientific data.
+Includes the peak-finder application for the detection and grouping of time-domain
+electromagnetic (TEM) anomalies measured along flight lines.
 
 Current build status
 ====================
 
 
-<table><tr><td>All platforms:</td>
+<table><tr>
+    <td>All platforms:</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23312&branchName=main">
-        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/curve-apps-feedstock?branchName=main">
-      </a>
+      <img src="https://img.shields.io/badge/noarch-disabled-lightgrey.svg" alt="noarch disabled">
     </td>
   </tr>
 </table>
