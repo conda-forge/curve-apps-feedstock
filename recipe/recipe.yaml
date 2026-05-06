@@ -2,46 +2,65 @@ schema_version: 1
 
 context:
   name: curve-apps
-  version: "0.2.1"
+  version: "0.3.0"
   python_min: '3.10'
+  module_name: ${{ name|lower|replace("-", "_") }}
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://github.com/MiraGeoscience/${{ name }}/archive/v${{ version }}.tar.gz
-  sha256: 70a32eb135b015eabf94f50fabe973ab69f53857678a22d78211d8de946c0f4a
+  url: https://github.com/MiraGeoscience/${{ name }}/archive/v${{ version }}.zip
+  sha256: 448f5220a3c7b1d9ebf943b9d7d32276f3b085ebda7f9fc7394e37b8142bf137
 
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: 
+    - export POETRY_DYNAMIC_VERSIONING_BYPASS=${{ version }}
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
+    - python ${{ python_min }}.*
     - pip
-    - poetry-core >=1.0.0
+    - poetry-core >=1.8.0
+    - poetry-dynamic-versioning >=1.9, 1.*
     - python ${{ python_min }}.*
     - setuptools
   run:
     - python >=${{ python_min }}
     # Mira packages
-    - geoh5py >=0.11.0, <0.12.dev
-    - geoapps-utils >=0.5.0, <0.6.dev
+    - geoh5py 0.12.*
+    - geoapps-utils 0.6.*
     # other direct dependencies
-    - numpy >=1.26.0, <1.27.dev
-    - pydantic >=2.5.2, <3.0.dev
-    - scikit-image >=0.24.0, <0.25.dev
-    - scipy >=1.14.0, <1.15.dev
-    - tqdm >=4.66.1, <5.0.dev
+    - numpy 1.26.* 
+    - pydantic >=2.5.2, 2.*
+    - scikit-image >=0.25.2, 0.25.*
+    - scipy 1.14.*
+    - tqdm >=4.66.1, 4.*
+    - dask-core 2025.3.*
+    # Dash and related dependencies
+    - dash >=3.0.4, 3.*
+    - dash-ag-grid >=32.3.1, 32.*
+    - dash-bootstrap-components >=2.0.3, 2.*
+    - dash-core-components 2.*
+    - dash-daq 0.6.*
+    - dash-html-components 2.*
+    - dash-table 5.*
+    - waitress >=3.0.2, 3.*
+  run_constraints:
+    - pywebview 6.*
 
 tests:
   - python:
       python_version: ${{ python_min }}.*
       imports:
-        - curve_apps
-      pip_check: true
+        - ${{ module_name }}
+        - ${{ module_name }}._version
+        - ${{ module_name }}.peak_finder
+        - dask
   - script:
       - pytest --ignore=tests/version_test.py
     requirements:
@@ -50,14 +69,19 @@ tests:
     files:
       source:
         - tests/
-
+  - package_contents:
+      files:
+        - site-packages/${{ module_name }}/_version.py
 about:
   summary: Find edges on 2D grids or vertices.
   description: |
     Auto-detection of trends and edges in geoscientific data.
+    Includes the peak-finder application for the detection and grouping of time-domain
+    electromagnetic (TEM) anomalies measured along flight lines.
   license: MIT
   license_file:
     - LICENSE
+    - docs/source/THIRD_PARTY_SOFTWARE.rst
   homepage: https://www.mirageoscience.com/mining-industry-software/python-integration/
   repository: https://github.com/MiraGeoscience/curve-apps
   documentation: https://mirageoscience-curve-apps.readthedocs-hosted.com/
